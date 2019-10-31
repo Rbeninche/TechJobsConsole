@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System;
+
 
 namespace TechJobsConsole
 {
@@ -37,6 +39,7 @@ namespace TechJobsConsole
                 }
             }
             return values;
+            
         }
 
         public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
@@ -62,7 +65,9 @@ namespace TechJobsConsole
         public static List<Dictionary<string, string>> FindByValue(string value)
         {
              LoadData();
-             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
 
             foreach (Dictionary<string, string> data in AllJobs)
             {
@@ -71,33 +76,18 @@ namespace TechJobsConsole
                     if ((data[key].ToLower()).Contains(value.ToLower()))
                         {
 
-
-
+                       
                         
-
-
-
                             jobs.Add(data);
 
-                        }
+                        jobs = jobs.GroupBy(x => x.Keys).Select(x => x.First()).ToList();
+                    }
 
-                 
-                }
 
                
+                }
 
-              
-
-
-
-
-
-
-            }
-
-            
-
-
+              }
             return jobs;
 
        

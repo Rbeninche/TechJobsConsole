@@ -43,6 +43,8 @@ namespace TechJobsConsole
                         List<string> results = JobData.FindAll(columnChoice);
 
                         Console.WriteLine("\n*** All " + columnChoices[columnChoice] + " Values ***");
+
+                        results.Sort();
                         foreach (string item in results)
                         {
                             Console.WriteLine(item);
@@ -66,14 +68,24 @@ namespace TechJobsConsole
                         /*Console.WriteLine("Search all fields not yet implemented.");*/
 
                         searchResults = JobData.FindByValue(searchTerm);
-                        PrintJobs(searchResults);
+                        if (searchResults.Count == 0)
+                        {
+                            Console.WriteLine(string.Format("{0} is not in our database", searchTerm));
+
+                        }
+                        else
+                        {
+                            PrintJobs(searchResults);
+
+                        }
 
 
                     }
                     else
                     {
                         searchResults = JobData.FindByColumnAndValue(columnChoice, searchTerm);
-                        PrintJobs(searchResults);
+                            PrintJobs(searchResults);
+                        
                     }
                 }
             }
@@ -131,6 +143,7 @@ namespace TechJobsConsole
 
                 foreach (string key in dictionaryJobs.Keys)
                 {
+
                     Console.WriteLine(string.Format("{0} : {1}", key, dictionaryJobs[key]));
 
                     
