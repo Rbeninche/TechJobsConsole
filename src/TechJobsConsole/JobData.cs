@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -57,6 +58,50 @@ namespace TechJobsConsole
 
             return jobs;
         }
+
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+             LoadData();
+             List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> data in AllJobs)
+            {
+                foreach (string key in data.Keys)
+                {
+                    if ((data[key].ToLower()).Contains(value.ToLower()))
+                        {
+
+
+
+                        
+
+
+
+                            jobs.Add(data);
+
+                        }
+
+                 
+                }
+
+               
+
+              
+
+
+
+
+
+
+            }
+
+            
+
+
+            return jobs;
+
+       
+          }
 
         /*
          * Load and parse data from job_data.csv
@@ -138,5 +183,7 @@ namespace TechJobsConsole
 
             return rowValues.ToArray();
         }
+
+       
     }
 }
